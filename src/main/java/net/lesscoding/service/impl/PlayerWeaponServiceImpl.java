@@ -28,4 +28,10 @@ public class PlayerWeaponServiceImpl extends ServiceImpl<PlayerWeaponMapper, Pla
         dto.setAccountId(StpUtil.getLoginIdAsString());
         return playerWeaponMapper.getPlayerAllWeapon(dto);
     }
+
+    @Override
+    public Object getPlayerWeaponDetail(QueryWeaponDto dto) {
+
+        return null;
+    }
 }

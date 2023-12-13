@@ -27,4 +27,8 @@ public class PlayerWeaponController {
         return ResultFactory.success(playerWeaponService.getPlayerAllWeapon(dto));
     }
 
+    @PostMapping("/detail")
+    public Result getPlayerWeaponDetail(@RequestBody QueryWeaponDto dto) {
+        return ResultFactory.success(playerWeaponService.getPlayerWeaponDetail(dto));
+    }
 }

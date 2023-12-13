@@ -19,4 +19,11 @@ public interface PlayerWeaponService extends IService<PlayerWeapon> {
      * @return
      */
     List<Weapon> getPlayerAllWeapon(QueryWeaponDto dto);
+
+    /**
+     *
+     * @param dto
+     * @return
+     */
+    Object getPlayerWeaponDetail(QueryWeaponDto dto);
 }

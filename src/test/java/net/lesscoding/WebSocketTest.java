@@ -33,9 +33,9 @@ public class WebSocketTest {
         socketUtil.announce(
                 new AnnounceDto(
                         "游戏更新公告:\n" +
-                                "1.战斗结果返回变更\n" +
-                                "2.新增战胜对手发送鱼塘嘲讽功能\n" +
-                                "3.增加了游戏背包查看功能",
+                                "1.登录方式变更\n" +
+                                "2.pvp新增分页跳转和查询功能\n" +
+                                "3.鱼塘聊天新增 #mask 屏蔽发言功能g",
                         0));
     }
 
