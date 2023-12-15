@@ -1,5 +1,6 @@
 package net.lesscoding.config;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.context.annotation.Configuration;
@@ -54,7 +55,6 @@ public class MyBatisPlusAutoFillConfig implements MetaObjectHandler {
     }
 
     public Integer getCurrentUserId() {
-        //return StpUtil.getLoginId(1);
-        return 1;
+        return StpUtil.getLoginId(1);
     }
 }
