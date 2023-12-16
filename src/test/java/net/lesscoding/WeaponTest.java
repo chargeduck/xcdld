@@ -1,6 +1,7 @@
 package net.lesscoding;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.extern.slf4j.Slf4j;
 import net.lesscoding.entity.AccountPlayer;
 import net.lesscoding.entity.PlayerWeapon;
 import net.lesscoding.entity.Weapon;
@@ -16,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author eleven
@@ -25,6 +28,7 @@ import java.util.List;
 @SpringBootTest(classes = MainApp.class)
 @RunWith(SpringRunner.class)
 @RefreshScope
+@Slf4j
 public class WeaponTest {
 
     @Autowired
@@ -59,5 +63,29 @@ public class WeaponTest {
             insertList.add(playerWeapon);
         }
         System.out.println(playerWeaponMapper.insertBatch(insertList));
+    }
+
+    @Test
+    public void delDuplicateData() {
+        List<PlayerWeapon> playerWeapons = playerWeaponMapper.selectList(null);
+        Map<Integer, List<PlayerWeapon>> playerWeaponsMap = playerWeapons.stream()
+                .collect(Collectors.groupingBy(PlayerWeapon::getPlayerId));
+        List<PlayerWeapon> delDataList = new ArrayList<>(playerWeapons.size());
+        playerWeaponsMap.forEach((key, value) -> {
+            Map<Integer, List<PlayerWeapon>> weaponMap = value.stream()
+                    .collect(Collectors.groupingBy(PlayerWeapon::getWeaponId));
+            weaponMap.forEach((weaponId, data) -> {
+                if (data.size() > 1) {
+                    data.remove(0);
+                    delDataList.addAll(data);
+                }
+            });
+        });
+        List<Integer> delPlayerWeaponIds = delDataList.stream()
+                .map(PlayerWeapon::getId)
+                .collect(Collectors.toList());
+        int delRows = playerWeaponMapper.delete(new QueryWrapper<PlayerWeapon>()
+                .in("id", delPlayerWeaponIds));
+        log.info("删除 {} 条数据", delRows);
     }
 }
