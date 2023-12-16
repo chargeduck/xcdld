@@ -1,5 +1,7 @@
 package net.lesscoding.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.collection.CollUtil;
 import net.lesscoding.common.Result;
 import net.lesscoding.common.ResultFactory;
 import net.lesscoding.entity.AccountPlayer;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author eleven
@@ -24,7 +27,8 @@ public class AccountPlayerController {
 
     @PostMapping("/getAll")
     public Result getAllPlayer(@RequestBody PlayerDto dto) {
-        return ResultFactory.success(playerService.getAllPlayer(dto));
+        List<String> loginUsers = StpUtil.searchSessionId("", 0, -1, true);
+        return ResultFactory.success(String.valueOf(CollUtil.size(loginUsers)), playerService.getAllPlayer(dto));
     }
 
     @PostMapping("/detail")
