@@ -177,7 +177,7 @@ public class ExpUtil {
                                 return !weaponIds.contains(item.getWeaponId());
                             })
                             .collect(Collectors.toList());
-            if (CollUtil.isEmpty(insertList)) {
+            if (CollUtil.isNotEmpty(insertList)) {
                 playerWeaponMapper.insertBatch(insertList);
             }
         }
