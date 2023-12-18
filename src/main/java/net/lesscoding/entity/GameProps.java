@@ -35,7 +35,7 @@ public class GameProps extends BaseEntity<GameProps> {
     private Integer grade;
 
     /**
-     * 0 锦囊 1礼包 2材料 3技能卡 4宝石 5不知道是啥
+     * 0 锦囊 1礼包 2材料 3技能卡 4宝石 5消耗品
      */
     private Integer type;
     /**
