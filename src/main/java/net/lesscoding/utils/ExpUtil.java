@@ -2,6 +2,7 @@ package net.lesscoding.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import net.lesscoding.common.Consts;
 import net.lesscoding.entity.AccountPlayer;
@@ -102,7 +103,7 @@ public class ExpUtil {
                 String.format("你%s", attacker.getHp() > 0 ? "挑战成功" : "挑战失败")));
         processList.add(new BattleProcess(processList.size() + 1,
                 String.format("你获得了%d经验值", attacker.getHp() > 0 ? winnerExp : loserExp)));
-       List<AfterPlayerVo> afterList = playerMapper.selectAfterPlayer(Arrays.asList(attacker.getId(), defender.getId()));
+        List<AfterPlayerVo> afterList = playerMapper.selectAfterPlayer(Arrays.asList(attacker.getId(), defender.getId()));
         addWeapon(attacker, defender, processList, afterList);
     }
 
@@ -158,8 +159,27 @@ public class ExpUtil {
         if (!defender.getIsNpc()) {
             addPlayerWeapon(playerVoMap, defender, insertList, processList, false);
         }
+        // TODO: 2023/12/16 如果玩家已经有这个武器的话，就不应该继续添加了
         if (CollUtil.isNotEmpty(insertList)) {
-            playerWeaponMapper.insertBatch(insertList);
+            List<PlayerWeapon> queryDataList = playerWeaponMapper.selectList(new QueryWrapper<PlayerWeapon>()
+                    .in("player_id", attacker.getId(), defender.getId()));
+            Map<Integer, List<PlayerWeapon>> playerWeaponsMap = queryDataList.stream()
+                    .collect(Collectors.groupingBy(PlayerWeapon::getPlayerId));
+            insertList = insertList.stream()
+                            .filter(item -> {
+                                List<PlayerWeapon> playerWeapons = playerWeaponsMap.get(item.getPlayerId());
+                                if (CollUtil.isEmpty(playerWeapons)) {
+                                    return true;
+                                }
+                                List<Integer> weaponIds = playerWeapons.stream()
+                                        .map(PlayerWeapon::getWeaponId)
+                                        .collect(Collectors.toList());
+                                return !weaponIds.contains(item.getWeaponId());
+                            })
+                            .collect(Collectors.toList());
+            if (CollUtil.isNotEmpty(insertList)) {
+                playerWeaponMapper.insertBatch(insertList);
+            }
         }
     }
 
