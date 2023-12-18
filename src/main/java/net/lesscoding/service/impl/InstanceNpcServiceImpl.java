@@ -38,7 +38,7 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
     private InstanceRecordMapper recordMapper;
 
     @Autowired
-    private NpcDropMapper dropMapper;
+    private GamePropsMapper dropMapper;
 
     @Autowired
     private PlayerPackageMapper packageMapper;
@@ -108,19 +108,19 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
     private void randomNpcDrop(InstanceNpc npc, List<BattleProcess> list, Integer playerId) {
         List<String> dropIdList = npc.getDropIdList();
         if (CollUtil.isNotEmpty(dropIdList)) {
-            List<NpcDrop> npcDrops = dropMapper.selectList(new QueryWrapper<NpcDrop>()
+            List<GameProps> gameProps = dropMapper.selectList(new QueryWrapper<GameProps>()
                     .in("id", dropIdList));
-            if (CollUtil.isNotEmpty(npcDrops)) {
-                NpcDrop realDrop = null;
-                if (npcDrops.size() == 1) {
-                    Boolean weightResult = BattleUtil.getWeightResult(npcDrops.get(0).getDropProbability());
+            if (CollUtil.isNotEmpty(gameProps)) {
+                GameProps realDrop = null;
+                if (gameProps.size() == 1) {
+                    Boolean weightResult = BattleUtil.getWeightResult(gameProps.get(0).getDropProbability());
                     if (weightResult) {
-                        realDrop = npcDrops.get(0);
+                        realDrop = gameProps.get(0);
                     }
                 } else {
-                    List<WeightRandom.WeightObj<NpcDrop>> weightList = new ArrayList<>(npcDrops.size());
-                    for (NpcDrop npcDrop : npcDrops) {
-                        weightList.add(new WeightRandom.WeightObj<>(npcDrop, npcDrop.getDropProbability()));
+                    List<WeightRandom.WeightObj<GameProps>> weightList = new ArrayList<>(gameProps.size());
+                    for (GameProps props : gameProps) {
+                        weightList.add(new WeightRandom.WeightObj<>(props, props.getDropProbability()));
                     }
                     realDrop = RandomUtil.weightRandom(weightList).next();
                 }
@@ -142,7 +142,7 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
                         packageMapper.insert(row);
                     }
                     list.add(new BattleProcess(list.size(),
-                            String.format("恭喜获得[%s] * 1, 请前往背包查看", realDrop.getName())));
+                            String.format("恭喜获得[%s] * 1, 请前往背包查看", realDrop.getPropsName())));
                 }
             }
         }

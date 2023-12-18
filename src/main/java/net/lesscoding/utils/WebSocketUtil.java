@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -58,8 +59,9 @@ public class WebSocketUtil {
     @Autowired
     private Gson gson;
 
+    private WebSocketClient client;
+
     private WebSocketClient webSocketClient() {
-        WebSocketClient client = null;
         try {
             SysDict sysDict = sysDictMapper.selectByTypeAndCode("service", "prodWebSocket");
             // 替换为你的WebSocket服务器地址和端口
@@ -96,8 +98,10 @@ public class WebSocketUtil {
         return client;
     }
 
-    public Object announce(AnnounceDto dto) throws InterruptedException {
-        WebSocketClient client = webSocketClient();
+    public void announce(AnnounceDto dto) throws InterruptedException {
+        if (client == null) {
+            client = webSocketClient();
+        }
         // 休眠三秒等待ws连接
         Thread.sleep(3000);
         List<String> loginIds = StpUtil.searchSessionId("", 0, -1, false);
@@ -128,11 +132,8 @@ public class WebSocketUtil {
             String text = gson.toJson(sendDto);
             log.info("当前发送的消息{}", text);
             client.getConnection().send(text);
-            Thread.sleep(dto.getDelayMinutes());
+            Thread.sleep(dto.getDelayMilliseconds());
         }
-        // 最后退出关闭连接
-        client.close();
-        return "success";
     }
 
     public String tauntRival(String attackerNickname, String rivalNickname) throws InterruptedException {
@@ -147,7 +148,32 @@ public class WebSocketUtil {
         String text = gson.toJson(sendDto);
         log.info("当前发送的消息{}", text);
         client.getConnection().send(text);
-        client.close();
         return "success";
+    }
+
+    @Scheduled(cron = "0 30 7 * * ?")
+    public void loginNoticeUser() throws InterruptedException {
+        if (client == null) {
+            client = webSocketClient();
+            sendHeartBeat();
+        }
+    }
+
+    @Scheduled(cron = "0 30 22 * * ?")
+    public void logoutNoticeUser() {
+        if (client != null) {
+            client.close();
+        }
+    }
+
+    @Scheduled(cron = "0/15 * 7-22 * * ?")
+    public void sendHeartBeat() throws InterruptedException {
+        if (client == null) {
+            client = webSocketClient();
+            Thread.sleep(3000);
+        }
+        SendDto<String> heartBeat = new SendDto<>();
+        heartBeat.setAction("HEARTBEAT");
+        client.getConnection().send(gson.toJson(heartBeat));
     }
 }

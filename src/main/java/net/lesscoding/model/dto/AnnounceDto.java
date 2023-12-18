@@ -16,5 +16,9 @@ public class AnnounceDto {
 
     private String content;
 
-    private Integer delayMinutes;
+    private Integer delayMilliseconds;
+
+    public Integer getDelayMilliseconds() {
+        return delayMilliseconds == null ? 0 : delayMilliseconds;
+    }
 }

@@ -30,13 +30,17 @@ public class WebSocketTest {
     private WebSocketUtil socketUtil;
     @Test
     public void webSocket() throws Exception {
-        socketUtil.announce(
-                new AnnounceDto(
-                        "游戏更新公告:\n" +
-                                "1.登录方式变更\n" +
-                                "2.pvp新增分页跳转和查询功能\n" +
-                                "3.鱼塘聊天新增 #mask 屏蔽发言功能g",
-                        0));
+        for (int i = 0; i < 3; i++) {
+            socketUtil.announce(
+                    new AnnounceDto(
+                            "游戏更新公告:\n" +
+                                    "1.登录方式变更\n" +
+                                    "2.pvp新增分页跳转和查询功能\n" +
+                                    "3.鱼塘聊天新增 #mask 屏蔽发言功能\n" +
+                                    "4.测试消息顺序" + i,
+                            5000));
+        }
+
     }
 
 

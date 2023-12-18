@@ -2,6 +2,7 @@ package net.lesscoding.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import net.lesscoding.common.BaseEntity;
 
 /**
@@ -10,13 +11,14 @@ import net.lesscoding.common.BaseEntity;
  * @apiNote
  */
 @Data
-@TableName("tb_drop_detail")
+@EqualsAndHashCode(callSuper = true)
+@TableName("tb_props_drop_detail")
 public class DropDetail extends BaseEntity<DropDetail> {
 
     /**
-     * npc掉落id
+     * 道具id
      */
-    private Integer npcDropId;
+    private Integer propsId;
 
     /**
      * 物品id
