@@ -9,4 +9,11 @@ import net.lesscoding.entity.GameProps;
  * @apiNote
  */
 public interface GamePropsService extends IService<GameProps> {
+
+    /**
+     * 编辑道具
+     * @param props     道具
+     * @return Integer  保存的记录数
+     */
+    Integer editGameProps(GameProps props);
 }

@@ -1,6 +1,8 @@
 package net.lesscoding.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.RandomUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
@@ -87,8 +89,10 @@ public class SystemServiceImpl implements SystemService {
 
         if (CollUtil.isNotEmpty(insertList)) {
             log.info("当前要自动创建账号数量为 -{}", insertList.size());
+            TimeInterval timer = DateUtil.timer();
             accountService.saveBatch(insertList, 500);
             playerService.addPlayerByAccount(insertList);
+            log.info("当前创建账号完成 用时{}", timer.interval());
         }
         return redisMacSet.size();
     }

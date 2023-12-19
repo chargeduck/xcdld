@@ -33,7 +33,7 @@ public class LoginMsg {
         this.username = String.format("爱坤公告发布_%s", LocalTime.now().format(DateTimeFormatter.ofPattern("mmssS")));
         this.platform = "IDEA";
         this.reconnected = false;
-        this.uuid = "FF-FF-FF-FF-FF";
+        this.uuid = "FF-FF-FF-FF-FB";
         this.pluginVersion = "1.6.7-beta";
         this.status = "FISHING";
 

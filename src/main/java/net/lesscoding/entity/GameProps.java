@@ -43,4 +43,11 @@ public class GameProps extends BaseEntity<GameProps> {
      */
     private Boolean allowOpen;
 
+    private Boolean canUse;
+
+    /**
+     * 售价
+     */
+    private Integer sellingPrice;
+
 }

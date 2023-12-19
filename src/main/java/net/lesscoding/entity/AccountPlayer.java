@@ -34,5 +34,5 @@ public class AccountPlayer extends BaseEntity<AccountPlayer> {
 
     private Integer energy;
 
-    private Integer species;
+    private Integer gold;
 }
