@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableScheduling
+//@EnableScheduling
 @MapperScan("net.lesscoding.mapper")
 public class MainApp {
     public static void main(String[] args) {

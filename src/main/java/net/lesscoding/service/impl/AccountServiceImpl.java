@@ -106,8 +106,8 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             RedisUserCache userVo = gson.fromJson(userCacheMap.get(mac), RedisUserCache.class);
             Set<String> accountSet = accountMapper.selectAccountSet(null);
             Account entity = new Account(userVo);
-            account.setAccount(accountUtil.getAccountStr(accountSet));
-            account.setPassword(PasswordUtil.encrypt(account.getAccount(), account.getSalt()));
+            entity.setAccount(accountUtil.getAccountStr(accountSet));
+            entity.setPassword(PasswordUtil.encrypt(entity.getAccount(), entity.getSalt()));
             accountMapper.insert(entity);
             playerService.addPlayerByAccount(Collections.singletonList(entity));
             StpUtil.login(entity.getId());

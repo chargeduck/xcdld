@@ -20,8 +20,10 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -41,6 +43,7 @@ import java.util.stream.Collectors;
 @Configuration
 @Slf4j
 @Lazy
+@Profile("prod")
 public class WebSocketUtil {
     @Autowired
 
@@ -77,7 +80,6 @@ public class WebSocketUtil {
 
                 @Override
                 public void onMessage(String message) {
-                    System.out.println("收到消息： " + message);
                 }
 
                 @Override
@@ -168,7 +170,7 @@ public class WebSocketUtil {
 
     @Scheduled(cron = "0/15 * 7-22 * * ?")
     public void sendHeartBeat() throws InterruptedException {
-        if (client == null) {
+        if (client == null || client.isClosed()) {
             client = webSocketClient();
             Thread.sleep(3000);
         }

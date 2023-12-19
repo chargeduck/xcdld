@@ -17,12 +17,6 @@ public interface SystemService {
     Object registerAccount(AccountDto dto);
 
     /**
-     * 根据redis之中的mac地址自动注册
-     * @return
-     */
-    Integer autoRegisterByRedisMac();
-
-    /**
      * 登陆接口
      * @param dto       登录参数
      * @return
