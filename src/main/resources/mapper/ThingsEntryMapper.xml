@@ -13,7 +13,6 @@
             #{item.fixed},
             #{item.num},
             #{item.type},
-            #{item.},
             #{item.createBy},
             #{item.createTime},
             #{item.updateBy},

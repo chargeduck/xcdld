@@ -9,4 +9,10 @@ import net.lesscoding.entity.Weapon;
  * @apiNote
  */
 public interface WeaponService extends IService<Weapon> {
+    /**
+     * 编辑武器数据
+     * @param weapon    武器数据
+     * @return Integer  保存记录数
+     */
+    Integer editWeapon(Weapon weapon);
 }
