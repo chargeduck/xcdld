@@ -55,6 +55,12 @@ public class MyBatisPlusAutoFillConfig implements MetaObjectHandler {
     }
 
     public Integer getCurrentUserId() {
-        return StpUtil.getLoginId(1);
+        Integer loginId;
+        try {
+            loginId = StpUtil.getLoginId(1);
+        } catch (Exception e) {
+            loginId = 0;
+        }
+        return loginId;
     }
 }
