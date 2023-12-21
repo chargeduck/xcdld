@@ -1,5 +1,6 @@
 package net.lesscoding.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,4 +36,13 @@ public class ThingsEntry extends BaseEntity<ThingsEntry> {
      * 0 武器 1技能 2称号 3光环 4宠物
      */
     private Integer type;
+
+    /**
+     *
+     */
+    @TableField(exist = false)
+    private String entryName;
+
+    @TableField(exist = false)
+    private String entryIntro;
 }
