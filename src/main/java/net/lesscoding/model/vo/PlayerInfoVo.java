@@ -1,6 +1,9 @@
 package net.lesscoding.model.vo;
 
 import lombok.Data;
+import org.apache.logging.log4j.message.ReusableMessage;
+
+import java.text.NumberFormat;
 
 /**
  * @author eleven
@@ -14,7 +17,10 @@ public class PlayerInfoVo {
     private String account;
 
     private Integer level;
-
+    /**
+     * 金币
+     */
+    private Long gold;
     /**
      * 昵称
      */
@@ -63,5 +69,20 @@ public class PlayerInfoVo {
     private Integer maxEnergy;
 
     private String token;
+
+    private String goldNum;
+
+    public Long getGold() {
+        return gold == null ? 0 : gold;
+    }
+
+    public String getGoldNum() {
+        // 创建一个 NumberFormat 对象，指定格式化模式为千分符
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+
+        // 使用 format() 方法将 long 类型的数字转换成千分符展示的字符串
+        return numberFormat.format(getGold());
+    }
 
 }

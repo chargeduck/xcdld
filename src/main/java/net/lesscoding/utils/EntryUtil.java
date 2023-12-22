@@ -1,10 +1,22 @@
 package net.lesscoding.utils;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.time.LocalDateTime;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.qrcode.QrCodeUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import net.lesscoding.entity.ThingsEntry;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +32,7 @@ public class EntryUtil {
         }
         List<String> resultList = new ArrayList<>(list.size());
         list.forEach(item -> {
-            String str = String.format("【%s】: %s %s %.3f",
+            String str = StrUtil.format("【{}】:{} {} {}",
                     item.getEntryName(),
                     item.getEntryIntro(),
                     item.getFixed() ? "固定增加" : "百分比增加" ,
@@ -31,24 +43,27 @@ public class EntryUtil {
     }
 
     public static void main(String[] args) {
-        ThingsEntry te1 = new ThingsEntry();
-        te1.setThingsId(0);
-        te1.setEntryId(0);
-        te1.setFixed(true);
-        te1.setNum(5D);
-        te1.setType(0);
-        te1.setEntryName("灼烧");
-        te1.setEntryIntro("附加灼烧伤害");
+        String path = "D:/QQFile/exportBookSource.json";
+        try {
+            String string = readJsonFileToString(path);
+            System.out.println(string);
+            System.out.println(string.length());
+            QrCodeUtil.generate(string, 1080, 960, FileUtil.file("d:/qrcode.jpg"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-
-        ThingsEntry te2 = new ThingsEntry();
-        te2.setThingsId(0);
-        te2.setEntryId(0);
-        te2.setFixed(false);
-        te2.setNum(0.001);
-        te2.setType(0);
-        te2.setEntryName("闪避率");
-        te2.setEntryIntro("提升闪避率");
-        System.out.println(EntryUtil.getEntriesStr(Lists.newArrayList(te1, te2)));
+    public static String readJsonFileToString(String filePath) {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            while ((currentLine = br.readLine()) != null) {
+                contentBuilder.append(currentLine).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
     }
 }

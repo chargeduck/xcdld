@@ -60,6 +60,7 @@
         <result column="account" property="account" />
         <result column="level" property="level" />
         <result column="nickname" property="nickname" />
+        <result column="gold" property="gold" />
         <result column="hp" property="hp" />
         <result column="attack" property="attack" />
         <result column="defender" property="defence" />
@@ -217,6 +218,7 @@
                ta.account,
                tb.nickname,
                tb.level,
+               tb.gold,
                exp,
                energy,
                need_exp,

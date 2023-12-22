@@ -1,5 +1,6 @@
 package net.lesscoding;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import net.lesscoding.entity.AccountPlayer;
@@ -87,5 +88,9 @@ public class WeaponTest {
         int delRows = playerWeaponMapper.delete(new QueryWrapper<PlayerWeapon>()
                 .in("id", delPlayerWeaponIds));
         log.info("删除 {} 条数据", delRows);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(StrUtil.format("金币: {}", 100_100_100));
     }
 }

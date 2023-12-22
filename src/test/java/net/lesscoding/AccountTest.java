@@ -99,10 +99,6 @@ public class AccountTest {
         entries.forEach((k, v) -> System.out.println(k + " \t==> " + v));
 
     }
-    @Test
-    public void autoRegisterByMacTest() {
-        System.out.println(systemService.autoRegisterByRedisMac());
-    }
 
     @Test
     public void autoInsertAccount() {
