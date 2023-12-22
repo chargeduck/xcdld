@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import net.lesscoding.entity.PlayerWeapon;
 import net.lesscoding.entity.Weapon;
 import net.lesscoding.model.dto.query.QueryWeaponDto;
+import net.lesscoding.model.vo.PlayerWeaponVo;
 
 import java.util.List;
 
@@ -15,10 +16,11 @@ import java.util.List;
 public interface PlayerWeaponService extends IService<PlayerWeapon> {
     /**
      * 获取玩家所有的武器
-     * @param dto   查询参数
+     *
+     * @param dto 查询参数
      * @return
      */
-    List<Weapon> getPlayerAllWeapon(QueryWeaponDto dto);
+    List<PlayerWeaponVo> getPlayerAllWeapon(QueryWeaponDto dto);
 
     /**
      *

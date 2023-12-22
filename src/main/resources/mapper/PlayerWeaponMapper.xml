@@ -18,22 +18,54 @@
         )
         </foreach>
     </insert>
-    <select id="getPlayerAllWeapon" resultType="net.lesscoding.entity.Weapon">
-        select tw.id,
-               tw.name,
-               tw.intro,
-               tw.type,
-               tw.grade,
-               tw.min_damage,
-               tw.max_damage,
-               tw.create_by,
-               tw.create_time,
-               tw.update_by,
-               tw.update_time,
-               tw.del_flag
+    <resultMap id="playerWeaponVo" type="net.lesscoding.model.vo.PlayerWeaponVo">
+        <id property="id" column="id" />
+        <result property="weaponName" column="weapon_name" />
+        <result property="grade" column="grade" />
+        <result property="intro" column="intro" />
+        <result property="weaponType" column="weapon_type" />
+        <result property="iconUrl" column="icon_url" />
+        <result property="sellingPrice" column="selling_price" />
+        <result property="minDamage" column="min_damage" />
+        <result property="maxDamage" column="max_damage" />
+        <result property="addLevel" column="add_level" />
+
+        <collection property="thingsEntries" ofType="net.lesscoding.entity.ThingsEntry">
+            <id property="id" column="te_id" />
+            <result property="thingsId" column="things_id" />
+            <result property="entryId" column="entry_id" />
+            <result property="fixed" column="fixed" />
+            <result property="num" column="num" />
+            <result property="type" column="te_type" />
+            <result property="entryName" column="entry_name" />
+            <result property="entryIntro" column="entry_intro" />
+        </collection>
+    </resultMap>
+    <select id="getPlayerAllWeapon" resultMap="playerWeaponVo">
+        select
+            tb.id,
+            tb.add_level as add_level,
+            tw.name as weapon_name,
+            tw.intro as intro,
+            tw.icon_url as icon_url,
+            tw.selling_price,
+            tw.min_damage,
+            tw.max_damage,
+            tw.grade,
+            tw.type as weapon_type,
+            te.id as te_id,
+            te.things_id,
+            te.entry_id,
+            te.fixed,
+            te.num,
+            te.type as te_type,
+            ei.entry_name,
+            ei.intro as entry_intro
         from tb_player_weapon tb
-                 left join tb_account_player ap on ap.id = tb.player_id
-                 left join tb_weapon tw on tw.id = tb.weapon_id
+        left join tb_account_player ap on ap.id = tb.player_id
+        left join tb_weapon tw on tw.id = tb.weapon_id
+        left join tb_things_entry te on tw.id = te.things_id and te.type = 0
+        left join tb_entry_item ei on ei.id = te.id
         <where>
             ap.id = #{playerId}
             <if test="weaponName != null and weaponName != ''">

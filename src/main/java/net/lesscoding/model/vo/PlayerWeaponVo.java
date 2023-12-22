@@ -2,6 +2,7 @@ package net.lesscoding.model.vo;
 
 import lombok.Data;
 import net.lesscoding.entity.ThingsEntry;
+import net.lesscoding.utils.EntryUtil;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class PlayerWeaponVo {
 
     private String intro;
 
-    private Integer type;
+    private Integer weaponType;
 
     private String iconUrl;
 
@@ -41,4 +42,8 @@ public class PlayerWeaponVo {
      * 属性描述
      */
     private List<String> thingEntriesDesc;
+
+    public List<String> getThingEntriesDesc() {
+        return EntryUtil.getEntriesStr(thingsEntries);
+    }
 }
