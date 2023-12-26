@@ -18,6 +18,13 @@
         )
         </foreach>
     </insert>
+    <update id="discardWeapon">
+        update tb_player_weapon
+        set del_flag = true,
+            update_time = now(),
+            update_by = #{updateBy}
+        where id = #{id}
+    </update>
     <resultMap id="playerWeaponVo" type="net.lesscoding.model.vo.PlayerWeaponVo">
         <id property="id" column="id" />
         <result property="weaponName" column="weapon_name" />
@@ -29,6 +36,7 @@
         <result property="minDamage" column="min_damage" />
         <result property="maxDamage" column="max_damage" />
         <result property="addLevel" column="add_level" />
+        <result property="accountId" column="account_id" />
 
         <collection property="thingsEntries" ofType="net.lesscoding.entity.ThingsEntry">
             <id property="id" column="te_id" />
@@ -60,7 +68,8 @@
             te.num,
             te.type as te_type,
             ei.entry_name,
-            ei.intro as entry_intro
+            ei.intro as entry_intro,
+            ap.account_id
         from tb_player_weapon tb
         left join tb_account_player ap on ap.id = tb.player_id
         left join tb_weapon tw on tw.id = tb.weapon_id

@@ -12,7 +12,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("tb_player_level_exp")
-public class PlayerLevelExp extends BaseEntity<PlayerLevelExp> {
+public class PlayerLevelExp extends BaseEntity {
 
     /**
      * 等级

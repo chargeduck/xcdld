@@ -11,7 +11,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("tb_account_player")
-public class AccountPlayer extends BaseEntity<AccountPlayer> {
+public class AccountPlayer extends BaseEntity {
     /**
      *  账号id
      */

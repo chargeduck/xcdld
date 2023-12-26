@@ -72,6 +72,13 @@
         <result column="energy" property="energy" />
         <result column="critical_chance" property="criticalChance" />
     </resultMap>
+    <insert id="addGold">
+        update tb_account_player
+        set gold = gold + #{gold},
+            update_time = now(),
+            update_by = #{accountId}
+        where account_id = #{accountId}
+    </insert>
     <update id="addPlayerExp">
         UPDATE tb_account_player
         SET exp = exp + #{addExp},

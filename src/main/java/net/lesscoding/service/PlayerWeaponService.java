@@ -22,10 +22,12 @@ public interface PlayerWeaponService extends IService<PlayerWeapon> {
      */
     List<PlayerWeaponVo> getPlayerAllWeapon(QueryWeaponDto dto);
 
+    Integer discardWeapon(QueryWeaponDto dto);
+
     /**
-     *
-     * @param dto
-     * @return
+     * 售卖
+     * @param dto       售卖的数据
+     * @return Integer  数据库受影响的函数
      */
-    Object getPlayerWeaponDetail(QueryWeaponDto dto);
+    Integer sellWeapon(QueryWeaponDto dto);
 }

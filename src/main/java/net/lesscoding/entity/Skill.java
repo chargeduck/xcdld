@@ -11,7 +11,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("tb_skill")
-public class Skill extends BaseEntity<Skill> {
+public class Skill extends BaseEntity {
     /**
      * 技能类型 0被动增加属性类 1被动触发 2主动技能
      */

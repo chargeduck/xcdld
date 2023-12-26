@@ -13,7 +13,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("sys_dict")
-public class SysDict extends BaseEntity<SysDict> {
+public class SysDict extends BaseEntity {
 
     @TableId(type = IdType.AUTO)
     private Integer id;

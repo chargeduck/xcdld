@@ -1,12 +1,7 @@
 package net.lesscoding.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import net.lesscoding.common.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 
 /**
@@ -15,7 +10,7 @@ import java.time.LocalDateTime;
  * @Description: [BOSS表： tb_boss]
  */
 @Data
-public class TbBoss extends BaseEntity<TbBoss> {
+public class TbBoss extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
 	

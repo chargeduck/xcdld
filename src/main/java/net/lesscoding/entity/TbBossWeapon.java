@@ -2,8 +2,6 @@ package net.lesscoding.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import net.lesscoding.common.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import java.time.LocalDateTime;
 
 
 /**
@@ -12,7 +10,7 @@ import java.time.LocalDateTime;
  * @Description: [boss武器表： tb_boss_weapon]
  */
 @Data
-public class TbBossWeapon extends BaseEntity<TbBossWeapon> {
+public class TbBossWeapon extends BaseEntity {
 
 	/**
 	 * 角色id

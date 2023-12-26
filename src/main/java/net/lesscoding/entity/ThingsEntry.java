@@ -14,7 +14,7 @@ import net.lesscoding.common.BaseEntity;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tb_things_entry")
-public class ThingsEntry extends BaseEntity<ThingsEntry> {
+public class ThingsEntry extends BaseEntity {
     /**
      * 物品id
      */

@@ -79,4 +79,12 @@ public interface AccountPlayerMapper extends BaseMapper<AccountPlayer> {
      * @param player
      */
     Integer updateEnergy(@Param("list") List<AccountPlayer> player);
+
+    /**
+     * 添加金币
+     * @param sellingPrice  售卖价格
+     * @param accountId     账号
+     * @return Integer      受影响的行数
+     */
+    Integer addGold(@Param("gold") Integer sellingPrice, @Param("accountId") Integer accountId);
 }

@@ -2,7 +2,6 @@ package net.lesscoding.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import net.lesscoding.entity.PlayerWeapon;
-import net.lesscoding.entity.Weapon;
 import net.lesscoding.model.dto.query.QueryWeaponDto;
 import net.lesscoding.model.vo.PlayerWeaponVo;
 
@@ -27,4 +26,6 @@ public interface PlayerWeaponMapper extends BaseMapper<PlayerWeapon> {
      * @return
      */
     List<PlayerWeaponVo> getPlayerAllWeapon(QueryWeaponDto dto);
+
+    Integer discardWeapon(QueryWeaponDto dto);
 }

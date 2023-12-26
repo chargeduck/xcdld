@@ -11,7 +11,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("tb_skill_level")
-public class SkillLevel extends BaseEntity<SkillLevel> {
+public class SkillLevel extends BaseEntity {
 
     /**
      * 技能id

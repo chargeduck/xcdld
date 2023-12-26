@@ -15,6 +15,8 @@ import java.util.List;
 public class PlayerWeaponVo {
     private String id;
 
+    private String accountId;
+
     private String weaponName;
 
     private Integer grade;

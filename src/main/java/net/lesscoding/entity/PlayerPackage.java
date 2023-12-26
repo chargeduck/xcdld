@@ -11,7 +11,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("tb_player_package")
-public class PlayerPackage extends BaseEntity<PlayerPackage> {
+public class PlayerPackage extends BaseEntity {
 
     /**
      * 玩家id

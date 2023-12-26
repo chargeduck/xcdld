@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tb_entry_item")
-public class EntryItem extends BaseEntity<EntryItem> {
+public class EntryItem extends BaseEntity {
 
     /**
      * 词条名称

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @TableName("tb_instance_npc")
-public class InstanceNpc extends BaseEntity<InstanceNpc> {
+public class InstanceNpc extends BaseEntity {
     private Integer instanceId;
 
     private String npcName;

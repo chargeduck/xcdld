@@ -13,7 +13,7 @@ import net.lesscoding.common.BaseEntity;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tb_game_props")
-public class GameProps extends BaseEntity<GameProps> {
+public class GameProps extends BaseEntity {
 
     /**
      * 名称

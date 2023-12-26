@@ -11,7 +11,7 @@ import net.lesscoding.common.BaseEntity;
  */
 @Data
 @TableName("tb_game_instance")
-public class GameInstance extends BaseEntity<GameInstance> {
+public class GameInstance extends BaseEntity {
     /**
      * 副本名称
      */

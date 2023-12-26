@@ -27,8 +27,34 @@ public class PlayerWeaponController {
         return ResultFactory.success(playerWeaponService.getPlayerAllWeapon(dto));
     }
 
-    @PostMapping("/detail")
-    public Result getPlayerWeaponDetail(@RequestBody QueryWeaponDto dto) {
-        return ResultFactory.success(playerWeaponService.getPlayerWeaponDetail(dto));
+    /**
+     * 丢弃武器
+     * @param dto       武器id
+     * @return Result
+     */
+    @PostMapping("/discard")
+    public Result discardWeapon(@RequestBody QueryWeaponDto dto) {
+        return ResultFactory.success(playerWeaponService.discardWeapon(dto));
     }
+
+    /**
+     * 售卖武器
+     * @param dto   武器id
+     * @return Result
+     */
+    @PostMapping("/sell")
+    public Result sellWeapon(@RequestBody QueryWeaponDto dto) {
+        return ResultFactory.success(playerWeaponService.sellWeapon(dto));
+    }
+
+    /**
+     * 强化武器
+     * @param dto   武器id
+     * @return Result
+     */
+    @PostMapping("/enhanced")
+    public Result enhancedWeapon(@RequestBody QueryWeaponDto dto) {
+        return ResultFactory.failed("功能暂未实现");
+    }
+
 }

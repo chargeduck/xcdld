@@ -15,7 +15,7 @@ import net.lesscoding.common.BaseEntity;
 @EqualsAndHashCode(callSuper = true)
 @TableName("tb_weapon")
 @NoArgsConstructor
-public class Weapon extends BaseEntity<Weapon> {
+public class Weapon extends BaseEntity {
     /**
      * 名称
      */

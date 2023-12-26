@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("tb_operation_log")
-public class OperationLog extends BaseEntity<OperationLog> {
+public class OperationLog extends BaseEntity {
 
     //@ApiModelProperty(" 操作模块")
     private String title;

@@ -2,10 +2,7 @@ package net.lesscoding.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import net.lesscoding.common.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import net.lesscoding.common.Consts;
-
-import java.time.LocalDateTime;
 
 
 /**
@@ -14,7 +11,7 @@ import java.time.LocalDateTime;
  * @Description: [boss奖励表： tb_boss_reward]
  */
 @Data
-public class TbBossReward extends BaseEntity<TbBossReward> {
+public class TbBossReward extends BaseEntity {
 
 	/**
 	 * BOSS_Id

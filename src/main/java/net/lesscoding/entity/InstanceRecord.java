@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 @Data
 @TableName("tb_instance_record")
-public class InstanceRecord extends BaseEntity<InstanceRecord> {
+public class InstanceRecord extends BaseEntity {
     /**
      * 玩家id
      */

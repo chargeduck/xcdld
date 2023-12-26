@@ -10,15 +10,26 @@ import lombok.Data;
  */
 @Data
 public class QueryWeaponDto {
-    private String playerId;
 
-    private String accountId;
+    private Integer id;
 
-    private String weaponId;
+    private Integer playerId;
+
+    private Integer accountId;
+
+    private Integer weaponId;
 
     private String weaponName;
 
     private Integer grade;
+    /**
+     * 丢弃类型 0丢弃 1售卖 2强化失败 3增幅失败
+     */
+    private Integer discardType;
 
     private Page page;
+
+    public Integer getGrade() {
+        return grade == null ? 0 : grade;
+    }
 }

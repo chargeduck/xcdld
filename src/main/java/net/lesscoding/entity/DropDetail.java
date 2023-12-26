@@ -13,7 +13,7 @@ import net.lesscoding.common.BaseEntity;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tb_props_drop_detail")
-public class DropDetail extends BaseEntity<DropDetail> {
+public class DropDetail extends BaseEntity {
 
     /**
      * 道具id

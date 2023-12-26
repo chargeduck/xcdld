@@ -15,7 +15,7 @@ import net.lesscoding.common.BaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("tb_player_weapon")
-public class PlayerWeapon extends BaseEntity<PlayerWeapon> {
+public class PlayerWeapon extends BaseEntity {
     private Integer playerId;
 
     private Integer weaponId;
