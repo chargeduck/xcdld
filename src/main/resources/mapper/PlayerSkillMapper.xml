@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lesscoding.mapper.PlayerSKillMapper">
+    <resultMap id="playerSkillVo" type="net.lesscoding.model.vo.PlayerSKillVo">
+        <id column="id" property="id" />
+        <result column="skill_level" property="skillLevel" />
+        <result column="skill_name" property="skillName" />
+        <result column="skill_intro" property="skillIntro" />
+        <result column="account_id" property="accountId" />
+        <result column="active_skill" property="activeSkill" />
+        <result column="fixed_skill" property="fixedSkill" />
+        <result column="min_damage" property="minDamage" />
+        <result column="max_damage" property="maxDamage" />
+
+        <collection property="thingsEntries" ofType="net.lesscoding.entity.ThingsEntry">
+            <id property="id" column="te_id" />
+            <result property="thingsId" column="things_id" />
+            <result property="entryId" column="entry_id" />
+            <result property="fixed" column="fixed" />
+            <result property="num" column="num" />
+            <result property="type" column="te_type" />
+            <result property="entryName" column="entry_name" />
+            <result property="entryIntro" column="entry_intro" />
+        </collection>
+    </resultMap>
+    <select id="getPlayerSkill" resultMap="playerSkillVo">
+        select
+            tb.id,
+            tb.skill_level,
+            ap.account_id,
+            sk.skill_name,
+            sk.skill_intro,
+            sk.active_skill,
+            sk.fixed_skill,
+            sl.min_damage,
+            sl.max_damage,
+            te.id as te_id,
+            te.things_id,
+            te.entry_id,
+            te.fixed,
+            te.num,
+            te.type as te_type,
+            ei.entry_name,
+            ei.intro as entry_intro
+        from tb_player_skill tb
+                 left join tb_account_player ap on ap.id = tb.player_id
+                 left join tb_skill sk on sk.id = tb.skill_id
+                 left join tb_skill_level sl on sl.skill_id = tb.skill_id and sl.level = tb.skill_level
+                 left join tb_things_entry te on te.things_id = sl.id
+                 left join tb_entry_item ei on ei.id = te.id
+
+    </select>
+</mapper>

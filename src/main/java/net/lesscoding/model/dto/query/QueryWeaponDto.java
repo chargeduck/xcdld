@@ -22,10 +22,6 @@ public class QueryWeaponDto {
     private String weaponName;
 
     private Integer grade;
-    /**
-     * 丢弃类型 0丢弃 1售卖 2强化失败 3增幅失败
-     */
-    private Integer discardType;
 
     private Page page;
 

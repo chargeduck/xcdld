@@ -11,6 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 
 /**
  * @author eleven
@@ -28,19 +32,34 @@ public class WebSocketTest {
 
     @Autowired
     private WebSocketUtil socketUtil;
+
     @Test
     public void webSocket() throws Exception {
         for (int i = 0; i < 3; i++) {
             socketUtil.announce(
                     new AnnounceDto(
                             "游戏更新公告:\n" +
-                                    "1.登录方式变更\n" +
-                                    "2.pvp新增分页跳转和查询功能\n" +
-                                    "3.鱼塘聊天新增 #mask 屏蔽发言功能\n" +
-                                    "4.测试消息顺序" + i,
+                                    "1.新增武器售卖，强化，丢弃功能\n",
                             5000));
         }
 
+    }
+
+    @Test
+    public void strTest() {
+        String input = "rakeshranjankumar";
+
+        Map<Character, Long> charCountMap = input.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(
+                        Function.identity(), Collectors.counting()
+                ));
+
+        charCountMap.forEach((character, count) -> {
+            if (count > 1) {
+                System.out.println("Character: " + character + ", Count: " + count);
+            }
+        });
     }
 
 
