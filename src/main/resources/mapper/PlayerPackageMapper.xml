@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.lesscoding.mapper.PlayerPackageMapper">
+    <resultMap id="propsVo" type="net.lesscoding.model.vo.PackagePropsVo">
+        <id property="id" column="id" />
+        <id property="objId" column="obj_id" />
+        <result property="propsName" column="props_name" />
+        <result property="propsIntro" column="props_intro" />
+        <result property="num" column="num" />
+        <result property="type" column="props_type" />
+        <result property="sellingPrice" column="selling_price" />
+        <result property="canUse" column="can_use" />
+        <result property="allowOpen" column="allow_open" />
+        <result property="dropProbability" column="drop_probability" />
+    </resultMap>
+    <select id="selectPackageProps" resultMap="propsVo">
+        select tb.id,
+               num,
+               obj_id,
+               props_name,
+               props_intro,
+               drop_probability,
+               grade,
+               gp.type as props_type,
+               selling_price,
+               can_use,
+               allow_open
+        from tb_player_package tb
+                 left join tb_game_props gp on gp.id = tb.obj_id
+                 left join tb_account_player ap on ap.id = tb.player_id
+        <where>
+            tb.del_flag = false
+            and ap.account_id = #{accountId}
+            and gp.type in <foreach collection="propsType" item="type" open="(" separator="," close=")">
+                #{type}
+            </foreach>
+        </where>
+    </select>
 </mapper>

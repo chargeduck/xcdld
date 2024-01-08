@@ -23,5 +23,4 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
     List<SysDict> selectByType(@Param("dictType") String dictType);
     SysDict selectByTypeAndCode(@Param("dictType") String dictType, @Param("dictCode") String dictCode);
 
-
 }

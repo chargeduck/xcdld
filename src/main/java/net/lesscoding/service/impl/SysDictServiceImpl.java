@@ -38,6 +38,11 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     @Override
     public List<SysDict> getByType(SysDict dict) {
         String dictType = dict.getDictType();
-        return dictMapper.selectList(new QueryWrapper<SysDict>().eq("del_flag", false).eq("dict_type", dictType));
+        return dictMapper.selectList(new QueryWrapper<SysDict>()
+                .eq("del_flag", false)
+                .eq("dict_type", dictType));
     }
+
+
+
 }

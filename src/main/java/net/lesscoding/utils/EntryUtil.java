@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import net.lesscoding.entity.ThingsEntry;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class EntryUtil {
             resultList.add(str);
         });
         return resultList;
+    }
+
+    public static String dropProbabilityStr(Double number) {
+        return String.format(" %.2f", number * 100) + "% ";
     }
 
 }

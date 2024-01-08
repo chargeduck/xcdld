@@ -2,6 +2,10 @@ package net.lesscoding.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import net.lesscoding.entity.PlayerPackage;
+import net.lesscoding.model.dto.query.QueryPackageEntryDto;
+import net.lesscoding.model.vo.PackagePropsVo;
+
+import java.util.List;
 
 /**
  * @author eleven
@@ -9,4 +13,11 @@ import net.lesscoding.entity.PlayerPackage;
  * @apiNote
  */
 public interface PlayerPackageMapper extends BaseMapper<PlayerPackage> {
+
+    /**
+     * 查询数据
+     * @param dto   查询参数
+     * @return List
+     */
+    List<PackagePropsVo> selectPackageProps(QueryPackageEntryDto dto);
 }

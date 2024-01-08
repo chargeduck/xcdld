@@ -2,6 +2,8 @@ package net.lesscoding.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import net.lesscoding.entity.PlayerPackage;
+import net.lesscoding.model.dto.query.QueryPackageEntryDto;
+import net.lesscoding.model.vo.PackagePropsVo;
 
 import java.util.List;
 
@@ -25,4 +27,6 @@ public interface PlayerPackageService extends IService<PlayerPackage> {
      * @return
      */
     Boolean addPlayerPackage(Integer playerId,List<PlayerPackage> playerPackages);
+
+    List<PackagePropsVo> getAllProps(QueryPackageEntryDto dto);
 }
