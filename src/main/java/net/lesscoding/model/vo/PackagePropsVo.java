@@ -1,6 +1,9 @@
 package net.lesscoding.model.vo;
 
 import lombok.Data;
+import net.lesscoding.entity.DropDetail;
+
+import java.util.List;
 
 /**
  * @author eleven
@@ -58,5 +61,10 @@ public class PackagePropsVo {
      * 爆率
      */
     private Double dropProbability;
+
+    // 品级 0白 1绿 2蓝 3紫 4粉 5传说 6史诗
+    private Integer grade;
+
+    private List<DropDetail> dropDetailList;
 
 }

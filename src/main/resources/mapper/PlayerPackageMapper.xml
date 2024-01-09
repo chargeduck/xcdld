@@ -12,28 +12,89 @@
         <result property="canUse" column="can_use" />
         <result property="allowOpen" column="allow_open" />
         <result property="dropProbability" column="drop_probability" />
+
+        <collection property="dropDetailList" ofType="net.lesscoding.entity.DropDetail" >
+            <id column="pdd_id" property="id" />
+            <result column="props_id" property="propsId"/>
+            <result column="pdd_obj_id" property="objId"/>
+            <result column="pdd_type" property="type"/>
+            <result column="pdd_num" property="num"/>
+            <result column="pdd_drop_probability" property="dropProbability"/>
+        </collection>
     </resultMap>
+    <insert id="insertBatch">
+        insert into tb_player_package
+        value <foreach collection="list" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.playerId},
+                #{item.objId},
+                #{item.num},
+                #{item.createBy},
+                #{item.createTime},
+                #{item.updateBy},
+                #{item.updateTime},
+                #{item.delFlag}
+        )
+        </foreach>
+        on duplicate key update
+        id=values(id),
+        player_id=values(player_id),
+        obj_id=values(obj_id),
+        num=values(num),
+        create_by=values(create_by),
+        create_time=values(create_time),
+        update_by=values(update_by),
+        update_time=values(update_time),
+        del_flag=values(del_flag)
+    </insert>
+    <update id="discardProps">
+        update tb_player_package
+        set del_flag = true,
+            update_by = #{accountId},
+            update_time = now()
+        where id = #{id}
+    </update>
+    <update id="substractProps">
+        update tb_player_package
+        set  update_by = #{accountId},
+             update_time = now(),
+             num = num - #{number}
+        where id = #{id}
+    </update>
     <select id="selectPackageProps" resultMap="propsVo">
-        select tb.id,
-               num,
-               obj_id,
-               props_name,
-               props_intro,
-               drop_probability,
-               grade,
-               gp.type as props_type,
-               selling_price,
-               can_use,
-               allow_open
+        select
+            tb.id,
+            tb.num,
+            tb.obj_id,
+            props_name,
+            props_intro,
+            gp.drop_probability,
+            grade,
+            gp.type as props_type,
+            selling_price,
+            can_use,
+            allow_open,
+            pdd.id as pdd_id,
+            pdd.props_id as props_id,
+            pdd.obj_id as pdd_obj_id,
+            pdd.type as pdd_type,
+            pdd.num as pdd_num,
+            pdd.drop_probability as pdd_drop_probability
         from tb_player_package tb
-                 left join tb_game_props gp on gp.id = tb.obj_id
-                 left join tb_account_player ap on ap.id = tb.player_id
+        left join tb_game_props gp on gp.id = tb.obj_id
+        left join tb_props_drop_detail pdd on pdd.props_id = gp.id
         <where>
             tb.del_flag = false
-            and ap.account_id = #{accountId}
-            and gp.type in <foreach collection="propsType" item="type" open="(" separator="," close=")">
-                #{type}
-            </foreach>
+            and tb.player_id = #{playerId}
+            <if test="id != null">
+                and tb.id = #{id}
+            </if>
+            <if test="propsType != null">
+                and gp.type in <foreach collection="propsType" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
         </where>
     </select>
 </mapper>

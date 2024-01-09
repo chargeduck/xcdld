@@ -25,4 +25,9 @@ public class GamePropsController {
     public Result editGameProps(@RequestBody GameProps props) {
         return ResultFactory.success(propsService.editGameProps(props));
     }
+
+    @PostMapping("/updateIntro")
+    public Result updatePropsIntro(@RequestBody GameProps props) {
+        return ResultFactory.success(propsService.updatePropsIntro(props));
+    }
 }

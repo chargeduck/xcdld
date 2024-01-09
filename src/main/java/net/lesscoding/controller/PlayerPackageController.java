@@ -2,6 +2,7 @@ package net.lesscoding.controller;
 
 import net.lesscoding.common.Result;
 import net.lesscoding.common.ResultFactory;
+import net.lesscoding.model.dto.PropsOperationDto;
 import net.lesscoding.model.dto.query.QueryPackageEntryDto;
 import net.lesscoding.service.PlayerPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,35 @@ public class PlayerPackageController {
     @PostMapping("/getAllProps")
     public Result getAllProps(@RequestBody QueryPackageEntryDto dto) {
         return ResultFactory.success(playerPackageService.getAllProps(dto));
+    }
+
+    /**
+     * 丢弃道具
+     * @param dto
+     * @return
+     */
+    @PostMapping("/discard")
+    public Result discardProps(@RequestBody PropsOperationDto dto) {
+        return ResultFactory.success(playerPackageService.discardProps(dto));
+    }
+
+    /**
+     * 售卖道具
+     * @param dto
+     * @return
+     */
+    @PostMapping("/sell")
+    public Result sellProps(@RequestBody PropsOperationDto dto) {
+        return ResultFactory.success(playerPackageService.sellProps(dto));
+    }
+
+    /**
+     * 打开道具
+     * @param dto
+     * @return
+     */
+    @PostMapping("/open")
+    public Result openProps(@RequestBody PropsOperationDto dto) {
+        return ResultFactory.success(playerPackageService.openProps(dto));
     }
 }

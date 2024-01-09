@@ -2,7 +2,9 @@ package net.lesscoding.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import net.lesscoding.entity.PlayerPackage;
+import net.lesscoding.model.dto.PropsOperationDto;
 import net.lesscoding.model.dto.query.QueryPackageEntryDto;
+import net.lesscoding.model.vo.OperaPropsVo;
 import net.lesscoding.model.vo.PackagePropsVo;
 
 import java.util.List;
@@ -29,4 +31,26 @@ public interface PlayerPackageService extends IService<PlayerPackage> {
     Boolean addPlayerPackage(Integer playerId,List<PlayerPackage> playerPackages);
 
     List<PackagePropsVo> getAllProps(QueryPackageEntryDto dto);
+
+    /**
+     * 丢弃道具
+     * @param dto
+     * @return
+     */
+    OperaPropsVo discardProps(PropsOperationDto dto);
+
+    /**
+     * 售卖道具
+     * @param dto
+     * @return
+     */
+    OperaPropsVo sellProps(PropsOperationDto dto);
+
+    /**
+     * 打开道具
+     *
+     * @param dto
+     * @return
+     */
+    OperaPropsVo openProps(PropsOperationDto dto);
 }

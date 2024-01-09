@@ -34,4 +34,8 @@ public class DropDetail extends BaseEntity {
      * 掉落概率
      */
     private Double dropProbability;
+
+    private Integer num;
+
+
 }

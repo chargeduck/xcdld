@@ -23,6 +23,23 @@
             <result property="entryIntro" column="entry_intro" />
         </collection>
     </resultMap>
+    <insert id="insertBatch">
+        insert into tb_player_skill
+        value
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.skillId},
+                #{item.skillLevel},
+                #{item.playerId},
+                #{item.createBy},
+                #{item.createTime},
+                #{item.updateBy},
+                #{item.updateTime},
+                #{item.delFlag}
+            )
+        </foreach>
+    </insert>
     <select id="getPlayerSkill" resultMap="playerSkillVo">
         select
             tb.id,

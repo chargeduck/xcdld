@@ -15,17 +15,17 @@ public class Skill extends BaseEntity {
     /**
      * 技能类型 0被动增加属性类 1被动触发 2主动技能
      */
-    private Integer skillType;
+    private Boolean activeSkill;
 
     /**
      * 技能名称
      */
-    private String name;
+    private String skillName;
 
     /**
      * 技能描述
      */
-    private String intro;
+    private String skillIntro;
 
     /**
      * 技能品级
@@ -35,5 +35,5 @@ public class Skill extends BaseEntity {
     /**
      * 是否固定伤害 true 固定伤害 false 百分比提升
      */
-    private Boolean fixed;
+    private Boolean fixedSkill;
 }

@@ -73,17 +73,17 @@ public class PlayerWeaponServiceImpl extends ServiceImpl<PlayerWeaponMapper, Pla
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public Integer sellWeapon(QueryWeaponDto dto) {
         checkLoginUser(dto);
+        Weapon weapon = weaponMapper.selectById(dto.getWeaponId());
+        accountPlayerMapper.addGold(weapon.getSellingPrice(), dto.getAccountId());
         // 品级 0白 1绿 2蓝 3紫 4粉 5传说 6史诗
         if (dto.getGrade() >= 4) {
             DiscardLog discardLog = new DiscardLog();
             discardLog.setObjId(dto.getId());
             discardLog.setType(0);
             discardLog.setPlayerId(dto.getPlayerId());
-            discardLog.setDiscardType(0);
+            discardLog.setDiscardType(1);
             discardLog.setReason("玩家主动售卖");
             discardLogMapper.insert(discardLog);
-            Weapon weapon = weaponMapper.selectById(dto.getWeaponId());
-            accountPlayerMapper.addGold(weapon.getSellingPrice(), dto.getAccountId());
             return playerWeaponMapper.discardWeapon(dto);
         }
         return playerWeaponMapper.deleteById(dto.getId());

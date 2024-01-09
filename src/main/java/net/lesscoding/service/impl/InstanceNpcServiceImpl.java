@@ -136,7 +136,6 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
                     } else {
                         row = new PlayerPackage();
                         row.setPlayerId(playerId);
-                        row.setType(3);
                         row.setNum(1);
                         row.setObjId(realDrop.getId());
                         packageMapper.insert(row);
