@@ -170,6 +170,7 @@ public class PlayerPackageServiceImpl extends ServiceImpl<PlayerPackageMapper, P
                     insertEntity = new PlayerPackage();
                     insertEntity.setObjId(item.getObjId());
                     insertEntity.setNum(item.getNum());
+                    insertEntity.setType(2);
                     insertEntity.setPlayerId(dto.getPlayerId());
                     insertProps.add(insertEntity);
                 } else {
@@ -255,7 +256,9 @@ public class PlayerPackageServiceImpl extends ServiceImpl<PlayerPackageMapper, P
         if (dataRow == null || dataRow.getDelFlag() ) {
             throw  new RuntimeException("用户不存在该道具或已被删除");
         }
-
+        if (dto.getNumber() > dataRow.getNum() || dataRow.getNum() == 0) {
+            throw  new RuntimeException("用户不存在该道具");
+        }
         if (!dataRow.getPlayerId().equals(dto.getPlayerId())) {
             throw  new RuntimeException("不允许打开其他玩家的道具");
         }

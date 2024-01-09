@@ -39,7 +39,10 @@ public class WebSocketTest {
             socketUtil.announce(
                     new AnnounceDto(
                             "游戏更新公告:\n" +
-                                    "1.新增武器售卖，强化，丢弃功能\n",
+                                    "1.背包功能完善\n"+
+                                    "2.技能面板完善\n" +
+                                    "3.副本锦囊新增开启功能，有几率开出武器，技能，道具等"
+                            ,
                             5000));
         }
 

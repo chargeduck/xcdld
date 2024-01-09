@@ -125,9 +125,9 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
                     realDrop = RandomUtil.weightRandom(weightList).next();
                 }
                 if (realDrop != null) {
-                    // 类型 0装备 1消耗品 2材料 3掉落礼包
+                    // 类型 0消耗品 1材料 2掉落礼包
                     PlayerPackage row = packageMapper.selectOne(new QueryWrapper<PlayerPackage>()
-                            .eq("type", 3)
+                            .eq("type", 2)
                             .eq("player_id", playerId)
                             .eq("obj_id", realDrop.getId()));
                     if (row != null) {
@@ -136,6 +136,7 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
                     } else {
                         row = new PlayerPackage();
                         row.setPlayerId(playerId);
+                        row.setType(2);
                         row.setNum(1);
                         row.setObjId(realDrop.getId());
                         packageMapper.insert(row);
