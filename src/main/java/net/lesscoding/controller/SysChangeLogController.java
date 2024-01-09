@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import javax.annotation.Resource;
 import cn.hutool.core.bean.BeanUtil;
 import net.lesscoding.entity.SysChangeLog;
+import net.lesscoding.model.dto.AnnounceDto;
 import net.lesscoding.model.vo.SysChangeLogVO;
 import net.lesscoding.service.impl.SysChangeLogServiceImpl;
+import net.lesscoding.utils.WebSocketUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import net.lesscoding.common.Result;
@@ -18,11 +21,13 @@ import java.util.List;
 * @time 2023-11-07 17:30:49
 */
 @RestController
-@RequestMapping("/sysChangeLog")
+@RequestMapping("/changeLog")
 public class SysChangeLogController{
 
-	@Resource
+	@Autowired
 	private SysChangeLogServiceImpl sysChangeLogServiceImpl;
+	@Autowired
+	private WebSocketUtil webSocketUtil;
 
 	/**
 	* 公告表列表
@@ -50,10 +55,15 @@ public class SysChangeLogController{
 	* @param sysChangeLogVO
 	* @return
 	*/
-	@PostMapping("/saveOrUpdate")
+	@PostMapping("/edit")
 	public Result saveOrUpdate(@RequestBody SysChangeLogVO sysChangeLogVO) {
 		SysChangeLog sysChangeLog = BeanUtil.copyProperties(sysChangeLogVO, SysChangeLog.class);
 		sysChangeLogServiceImpl.saveOrUpdate(sysChangeLog);
+		try {
+			webSocketUtil.announce(new AnnounceDto(sysChangeLog.getContent(), 500));
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 		return ResultFactory.success("success");
 	}
 

@@ -23,13 +23,16 @@
         </collection>
     </resultMap>
     <insert id="insertBatch">
-        insert into tb_player_package
+        insert into tb_player_package(
+               id, player_id, obj_id,num,type,
+               create_by, create_time, update_by, update_time, del_flag)
         value <foreach collection="list" item="item" separator=",">
             (
                 #{item.id},
                 #{item.playerId},
                 #{item.objId},
                 #{item.num},
+                #{item.type},
                 #{item.createBy},
                 #{item.createTime},
                 #{item.updateBy},
@@ -42,6 +45,7 @@
         player_id=values(player_id),
         obj_id=values(obj_id),
         num=values(num),
+        type=values(type),
         create_by=values(create_by),
         create_time=values(create_time),
         update_by=values(update_by),

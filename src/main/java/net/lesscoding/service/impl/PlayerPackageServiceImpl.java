@@ -93,9 +93,9 @@ public class PlayerPackageServiceImpl extends ServiceImpl<PlayerPackageMapper, P
             discardLog.setDiscardType(0);
             discardLog.setReason("玩家主动丢弃");
             discardLogMapper.insert(discardLog);
-            return new OperaPropsVo(playerPackageMapper.discardProps(dto), null);
+            return new OperaPropsVo(playerPackageMapper.discardProps(dto), "丢弃成功");
         }
-        return new OperaPropsVo(playerPackageMapper.deleteById(dto.getId()), null);
+        return new OperaPropsVo(playerPackageMapper.deleteById(dto.getId()), "丢弃成功");
     }
 
     private PackagePropsVo getPackagePropsVo(PropsOperationDto dto) {
@@ -121,9 +121,9 @@ public class PlayerPackageServiceImpl extends ServiceImpl<PlayerPackageMapper, P
             discardLog.setDiscardType(1);
             discardLog.setReason("玩家主动售卖");
             discardLogMapper.insert(discardLog);
-            return new OperaPropsVo(playerPackageMapper.discardProps(dto), null);
+            return new OperaPropsVo(playerPackageMapper.discardProps(dto), StrUtil.format("获得{}金币", packagePropsVo.getSellingPrice()));
         }
-        return new OperaPropsVo(playerPackageMapper.deleteById(dto.getId()), "售卖");
+        return new OperaPropsVo(playerPackageMapper.deleteById(dto.getId()), StrUtil.format("获得{}金币", packagePropsVo.getSellingPrice()));
     }
 
     @Override
