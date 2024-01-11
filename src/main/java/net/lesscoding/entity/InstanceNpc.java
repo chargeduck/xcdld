@@ -1,14 +1,17 @@
 package net.lesscoding.entity;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import net.lesscoding.common.BaseEntity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author eleven
@@ -43,5 +46,25 @@ public class InstanceNpc extends BaseEntity {
             return Arrays.asList(dropIds.split(","));
         }
         return new ArrayList<>();
+    }
+
+    @TableField(exist = false)
+    private List<GameProps> dropPropsList;
+
+    @TableField(exist = false)
+    private String dropPropsStr;
+
+    public String getDropPropsStr() {
+        if (CollUtil.isEmpty(dropPropsList)) {
+            return "";
+        }
+        return dropPropsList.stream()
+                .map(item -> StrUtil.format("道具: {}\n掉落概率: {}%\n描述{}\n",
+                        item.getPropsName(),
+                        BigDecimal.valueOf(item.getDropProbability() * 100).doubleValue(),
+                        item.getPropsIntro()
+                        ))
+                .collect(Collectors.joining(","));
+
     }
 }

@@ -43,7 +43,7 @@ public class GlobalExceptionHandler{
     @ExceptionHandler({NotLoginException.class})
     public Result notLoginExceptionHandler(NotLoginException e) {
         log.error("======未登录访问登录资源======");
-        return ResultFactory.failed("用户未登录");
+        return ResultFactory.build(401,"用户未登录", null);
     }
     /**
      * 处理运行时异常

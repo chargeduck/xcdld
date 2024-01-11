@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.lesscoding.mapper.InstanceNpcMapper">
-    <select id="selectInstanceNpcList" resultType="net.lesscoding.entity.InstanceNpc">
-        select id,
+    <resultMap id="npcMap" type="net.lesscoding.entity.InstanceNpc" >
+        <id property="id" column="id" />
+        <result property="instanceId" column="instanceId" />
+        <result property="npcName" column="npc_name" />
+        <result property="playerId" column="player_id" />
+        <result property="bossFlag" column="boss_flag" />
+        <result property="increaseRatio" column="increase_ratio" />
+        <result property="floor" column="floor" />
+        <result property="dropIds" column="drop_ids" />
+
+        <collection property="dropPropsList" ofType="net.lesscoding.entity.GameProps" >
+            <id property="id" column="gp_id" />
+            <result property="propsName" column="props_name" />
+            <result property="propsIntro" column="props_intro" />
+            <result property="dropProbability" column="drop_probability" />
+        </collection>
+    </resultMap>
+    <select id="selectInstanceNpcList" resultMap="npcMap">
+        select tb.id,
                instance_id,
                npc_name,
                player_id,
-               bossFlag,
+               boss_flag,
                increase_ratio,
                floor,
                drop_ids,
-               create_by,
-               create_time,
-               update_by,
-               update_time,
-               del_flag
-        from tb_instance_npc
+               gp.id as gp_id,
+               gp.props_name,
+               gp.props_intro,
+               gp.drop_probability
+        from tb_instance_npc tb
+                 left join tb_game_props gp on gp.id = tb.drop_ids
         where instance_id = #{instanceId}
     </select>
 </mapper>
