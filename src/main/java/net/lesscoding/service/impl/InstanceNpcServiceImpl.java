@@ -56,7 +56,7 @@ public class InstanceNpcServiceImpl extends ServiceImpl<InstanceNpcMapper, Insta
         npcPlayer.increaseNpcAttr(npc);
         List<BattleProcess> processList = new ArrayList<>();
         BattleUtil.doBattle(player, npcPlayer, processList, 1);
-        int loginId = StpUtil.getLoginIdAsInt();
+
         InstanceRecord notCompletedInstance = recordMapper.getNotCompletedInstance(new JoinInstanceDto(player.getId(), npc.getInstanceId()));
         expUtil.addPlayerExp(player, npcPlayer, processList);
         // 玩家胜利

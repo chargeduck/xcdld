@@ -3,7 +3,7 @@
 <mapper namespace="net.lesscoding.mapper.InstanceNpcMapper">
     <resultMap id="npcMap" type="net.lesscoding.entity.InstanceNpc" >
         <id property="id" column="id" />
-        <result property="instanceId" column="instanceId" />
+        <result property="instanceId" column="instance_id" />
         <result property="npcName" column="npc_name" />
         <result property="playerId" column="player_id" />
         <result property="bossFlag" column="boss_flag" />
