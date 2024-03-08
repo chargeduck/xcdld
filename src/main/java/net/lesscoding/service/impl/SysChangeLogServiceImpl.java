@@ -1,18 +1,32 @@
 package net.lesscoding.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.hutool.core.bean.BeanUtil;
+import lombok.extern.slf4j.Slf4j;
 import net.lesscoding.entity.SysChangeLog;
 import net.lesscoding.mapper.SysChangeLogMapper;
 import net.lesscoding.service.SysChangeLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 /**
 * @author Lan
 * @time 2023-11-07 17:30:49
 */
 @Service
+@Slf4j
 public class SysChangeLogServiceImpl extends ServiceImpl<SysChangeLogMapper, SysChangeLog> implements SysChangeLogService {
 
+    @Autowired
+    private SysChangeLogMapper changeLogMapper;
+
+    public SysChangeLog pluginCheckUpgrade(SysChangeLog changeLog) {
+        SysChangeLog sysChangeLog = changeLogMapper.selectOne(new QueryWrapper<SysChangeLog>()
+                .eq("del_flag", false)
+                .eq("type", 0)
+                .orderByAsc(false, "publish_time")
+        );
+        log.info("当前的变更记录 {}", sysChangeLog);
+        return sysChangeLog;
+    }
 }

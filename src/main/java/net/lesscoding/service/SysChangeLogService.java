@@ -10,4 +10,10 @@ import net.lesscoding.entity.SysChangeLog;
 */
 public interface SysChangeLogService extends IService<SysChangeLog> {
 
+    /**
+     * 插件端校验是否更新
+     * @param log
+     * @return
+     */
+    SysChangeLog pluginCheckUpgrade(SysChangeLog log);
 }
