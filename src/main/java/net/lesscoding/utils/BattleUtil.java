@@ -131,13 +131,13 @@ public class BattleUtil {
 
     public static BattleRequest initBattleRequest(Player attacker, Player defender, int round) {
         CurrentBattleProcess currentBattleProcess = CurrentBattleProcess.builder()
-                .orginAttackerName(attacker.getNickname())
+                .originAttackerName(attacker.getNickname())
                 .attackerName(attacker.getNickname())
                 .attackerDefence(attacker.getDefence())
                 .attackerAttack(attacker.getAttack())
                 .attackerHp(attacker.getHp())
                 .attackerWeaponList(attacker.getWeaponList())
-                .orginDefenderName(defender.getNickname())
+                .originDefenderName(defender.getNickname())
                 .defenderAttack(defender.getAttack())
                 .defenderName(defender.getNickname())
                 .defenderDefence(defender.getDefence())

@@ -1,4 +1,4 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import com.google.common.collect.Lists;
 import lombok.var;

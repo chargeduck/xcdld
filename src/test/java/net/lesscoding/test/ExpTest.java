@@ -1,4 +1,4 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import lombok.extern.slf4j.Slf4j;
 

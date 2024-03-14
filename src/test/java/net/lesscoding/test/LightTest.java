@@ -1,4 +1,4 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

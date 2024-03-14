@@ -1,4 +1,4 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import cn.hutool.core.util.RandomUtil;
 import lombok.Data;

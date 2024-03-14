@@ -12,5 +12,13 @@
 		a.update_time AS "updateTime",
 		a.del_flag AS "delFlag"
 	</sql>
+    <select id="selectPluginLastChangeLog" resultType="net.lesscoding.entity.SysChangeLog">
+		select *
+		from sys_change_log
+		where del_flag = false
+		and type = 0
+		order by publish_time desc
+		limit 1
+	</select>
 
 </mapper>

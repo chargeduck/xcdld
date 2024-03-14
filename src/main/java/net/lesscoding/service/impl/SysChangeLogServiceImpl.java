@@ -21,11 +21,7 @@ public class SysChangeLogServiceImpl extends ServiceImpl<SysChangeLogMapper, Sys
     private SysChangeLogMapper changeLogMapper;
 
     public SysChangeLog pluginCheckUpgrade(SysChangeLog changeLog) {
-        SysChangeLog sysChangeLog = changeLogMapper.selectOne(new QueryWrapper<SysChangeLog>()
-                .eq("del_flag", false)
-                .eq("type", 0)
-                .orderByAsc(false, "publish_time")
-        );
+        SysChangeLog sysChangeLog = changeLogMapper.selectPluginLastChangeLog();
         log.info("当前的变更记录 {}", sysChangeLog);
         return sysChangeLog;
     }

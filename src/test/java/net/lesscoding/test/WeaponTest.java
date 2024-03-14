@@ -1,8 +1,9 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import net.lesscoding.MainApp;
 import net.lesscoding.entity.AccountPlayer;
 import net.lesscoding.entity.PlayerWeapon;
 import net.lesscoding.entity.Weapon;

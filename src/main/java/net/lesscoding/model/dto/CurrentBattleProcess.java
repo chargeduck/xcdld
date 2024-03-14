@@ -12,9 +12,9 @@ import java.util.List;
 @Builder
 public class CurrentBattleProcess {
 
-    private String orginAttackerName;
+    private String originAttackerName;
 
-    private String orginDefenderName;
+    private String originDefenderName;
 
     private String attackerName;
 

@@ -1,7 +1,8 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import net.lesscoding.MainApp;
 import net.lesscoding.model.dto.AnnounceDto;
 import net.lesscoding.utils.WebSocketUtil;
 import org.junit.Test;

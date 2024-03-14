@@ -1,6 +1,7 @@
-package net.lesscoding;
+package net.lesscoding.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import net.lesscoding.MainApp;
 import net.lesscoding.entity.Account;
 import net.lesscoding.mapper.AccountMapper;
 import net.lesscoding.service.AccountService;
