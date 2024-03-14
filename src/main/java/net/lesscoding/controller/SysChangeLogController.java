@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 * @time 2023-11-07 17:30:49
 */
 @RestController
-	@RequestMapping("/changeLog")
+@RequestMapping("/changeLog")
 public class SysChangeLogController{
 
 	@Autowired

@@ -1,6 +1,5 @@
 package net.lesscoding.test;
 
-import net.lesscoding.link.BattleHandler;
 import org.junit.Test;
 
 /**
@@ -12,6 +11,6 @@ public class LinkTest {
 
     @Test
     public void linkTest() {
-        BattleHandler
+
     }
 }
