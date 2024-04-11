@@ -36,6 +36,6 @@ public class LoginMsg {
         this.uuid = "FF-FF-FF-FF-FB";
         this.pluginVersion = "1.6.7-beta";
         this.status = "FISHING";
-
+        this.token = "{\"qq\":\"2496290990\",\"loginCode\":\"6d99f03d-9abf-4200-a359-6ce4b8560516\"}";
     }
 }
