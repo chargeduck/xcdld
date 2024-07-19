@@ -43,10 +43,9 @@ import java.util.stream.Collectors;
 @Configuration
 @Slf4j
 @Lazy
-@Profile("prod")
+//@Profile("prod")
 public class WebSocketUtil {
     @Autowired
-
     private SysDictMapper sysDictMapper;
 
     @Autowired
