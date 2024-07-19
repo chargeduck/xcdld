@@ -91,15 +91,15 @@
             <artifactId>jedis</artifactId>
             <version>3.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.4.1</version>
+        </dependency>
         <!--Spring相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>dev
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.3.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

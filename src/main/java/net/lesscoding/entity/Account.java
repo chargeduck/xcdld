@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.lesscoding.common.BaseEntity;
+import net.lesscoding.model.dto.AccountDto;
 import net.lesscoding.model.vo.RedisUserCache;
+import net.lesscoding.utils.IpUtils;
 import net.lesscoding.utils.PasswordUtil;
 
 /**
@@ -68,4 +70,14 @@ public class Account extends BaseEntity {
         this.region = cache.getExtraVo().getShortRegion();
         this.salt = PasswordUtil.salt();
     }
+
+    public Account(AccountDto dto) {
+        this.nickname = dto.getNickname();
+        this.mac = dto.getMac();
+        this.ip = IpUtils.getHostIp();
+        this.platform = "WEB";
+        this.region = dto.getRegion();
+        this.salt = PasswordUtil.salt();
+    }
+
 }

@@ -18,6 +18,7 @@ import net.lesscoding.utils.AccountUtil;
 import net.lesscoding.utils.IpUtils;
 import net.lesscoding.utils.PasswordUtil;
 import net.lesscoding.utils.ServletUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,7 +106,12 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             Map<String,String> userCacheMap = jedisTemplate.boundHashOps(userCache).entries();
             RedisUserCache userVo = gson.fromJson(userCacheMap.get(mac), RedisUserCache.class);
             Set<String> accountSet = accountMapper.selectAccountSet(null);
-            Account entity = new Account(userVo);
+            Account entity = null;
+            if (userVo != null) {
+                entity = new Account(userVo);
+            } else {
+                entity = new Account(dto);
+            }
             entity.setAccount(accountUtil.getAccountStr(accountSet));
             entity.setPassword(PasswordUtil.encrypt(entity.getAccount(), entity.getSalt()));
             accountMapper.insert(entity);

@@ -38,5 +38,8 @@ public class AccountDto {
      */
     private String password;
 
+    private String region;
+
+    private String nickname;
 
 }
