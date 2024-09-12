@@ -114,6 +114,9 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             }
             entity.setAccount(accountUtil.getAccountStr(accountSet));
             entity.setPassword(PasswordUtil.encrypt(entity.getAccount(), entity.getSalt()));
+            if (StrUtil.isBlank(entity.getNickname())) {
+                entity.setNickname(entity.getAccount() + "");
+            }
             accountMapper.insert(entity);
             playerService.addPlayerByAccount(Collections.singletonList(entity));
             StpUtil.login(entity.getId());
