@@ -1,6 +1,9 @@
 package net.lesscoding.entity;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import net.lesscoding.common.BaseEntity;
 

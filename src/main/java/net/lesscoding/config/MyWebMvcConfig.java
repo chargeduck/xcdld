@@ -38,6 +38,7 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
                     SaRouter
                             .match("/**")    // 拦截的 path 列表，可以写多个 */
                             .notMatch("/sys/**")//系统服务全排除
+                            .notMatch("/test/**")
                             // 下边的是knife4j使用的
                             .notMatch("/*.html")
                             .notMatch("/swagger-resources")

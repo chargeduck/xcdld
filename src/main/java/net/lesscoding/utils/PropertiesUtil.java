@@ -10,6 +10,7 @@ import org.springframework.core.env.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.StandardServletEnvironment;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -40,12 +41,12 @@ public class PropertiesUtil {
      * dev环境启动时打印当前的所有配置文件
      * @throws Exception
      */
-    //@PostConstruct
+    @PostConstruct
     public void afterRunning() throws Exception {
         // 生产环境不输出配置信息
-        if (active.toLowerCase().contains("prod")) {
-            return;
-        }
+        //if (active.toLowerCase().contains("prod")) {
+        //    return;
+        //}
         MutablePropertySources propertySources = ((StandardServletEnvironment) environment).getPropertySources();
         Map<String, String> propertiesMap = new HashMap<>(propertySources.size());
         for (Iterator<PropertySource<?>> iterator = propertySources.iterator(); iterator.hasNext(); ) {

@@ -1,0 +1,21 @@
+{
+  "username": "尺寸长s",
+  "state": "ONLINE",
+  "ip": "49.78.130.73",
+  "region": "中国|0|江苏省|南京市|电信",
+  "role": "USER",
+  "uuid": "F6-BD-3C-B7-57-67",
+  "platform": "IDEA",
+  "clientVersion": "1.6.7-beta0",
+  "extra": {
+    "uuid ": "F6-BD-3C-B7-57-67",
+    "id": "fa163efffea807d1-0000d468-00000008-4fc6b9ca217d2b49-a4219148",
+    "username": "尺寸长s",
+    "status": "FISHING",
+    "shortRegion": "苏",
+    "role": "USER",
+    "permit": 3,
+    "platform": "IDEA",
+    "clientVersion": "1.6.7-beta0"
+  }
+}
