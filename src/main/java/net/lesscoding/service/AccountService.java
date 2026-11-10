@@ -32,6 +32,13 @@ public interface AccountService extends IService<Account> {
     String doLogin(AccountDto dto);
 
     /**
+     * manager SSO 登录：凭 manager 平台 satoken 换取本站登录态
+     * @param dto 含 satoken（manager 登录态 token）
+     * @return 本站 token
+     */
+    String ssoLogin(AccountDto dto);
+
+    /**
      * 并更用户名和密码
      *
      * @param dto 账号

@@ -3,3 +3,16 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8080
+
+# manager SSO 配置（方案A：共享 manager 的 Sa-Token Redis）
+# 单机部署默认 localhost:6379/db0/token-name=satoken，与 xechat-manager 一致即可；
+# 生产/多机时覆盖为 manager 的 Redis 地址（并在 Nacos dld-common.yaml 同步本段）
+xechat:
+  sso:
+    manager:
+      redis:
+        host: localhost
+        port: 6379
+        password:
+        database: 0
+      token-name: satoken

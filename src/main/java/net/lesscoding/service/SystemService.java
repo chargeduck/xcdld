@@ -23,5 +23,12 @@ public interface SystemService {
      */
     Object doLogin(AccountDto dto);
 
+    /**
+     * manager SSO 登录接口
+     * @param dto   含 satoken（manager 登录态 token）
+     * @return 玩家详情（含本站 token）
+     */
+    Object ssoLogin(AccountDto dto);
+
     String redeploy();
 }

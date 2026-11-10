@@ -54,6 +54,14 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
+    public Object ssoLogin(AccountDto dto) {
+        String token = accountService.ssoLogin(dto);
+        PlayerInfoVo playerDetail = playerService.getPlayerDetail(null);
+        playerDetail.setToken(token);
+        return playerDetail;
+    }
+
+    @Override
     public String redeploy() {
 
         return null;

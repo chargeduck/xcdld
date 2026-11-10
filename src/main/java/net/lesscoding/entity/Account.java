@@ -61,6 +61,11 @@ public class Account extends BaseEntity {
 
     private String platform;
 
+    /**
+     * manager 平台用户ID（SSO 绑定，来源 xechat-manager 的 tb_sys_user.id）
+     */
+    private Long managerUserId;
+
 
     public Account(RedisUserCache cache) {
         this.nickname = cache.getUsername();

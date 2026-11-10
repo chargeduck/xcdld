@@ -42,4 +42,9 @@ public class AccountDto {
 
     private String nickname;
 
+    /**
+     * manager 平台登录态 token（SSO 登录时传入，来自 xechat-manager 的 satoken）
+     */
+    private String satoken;
+
 }

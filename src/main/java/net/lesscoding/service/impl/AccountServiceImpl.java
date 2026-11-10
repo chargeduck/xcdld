@@ -14,6 +14,7 @@ import net.lesscoding.model.dto.UpdatePwdDto;
 import net.lesscoding.model.vo.RedisUserCache;
 import net.lesscoding.service.AccountPlayerService;
 import net.lesscoding.service.AccountService;
+import net.lesscoding.service.ManagerSsoService;
 import net.lesscoding.utils.AccountUtil;
 import net.lesscoding.utils.IpUtils;
 import net.lesscoding.utils.PasswordUtil;
@@ -65,6 +66,9 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
     @Autowired
     private AccountUtil accountUtil;
+
+    @Autowired
+    private ManagerSsoService managerSsoService;
 
     @Override
     public String registerAccount(Account account) {
@@ -145,6 +149,47 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             default:
                 throw new RuntimeException("登录类型异常");
         }
+    }
+
+    /**
+     * manager SSO 登录：凭 manager 平台 satoken 换取本站登录态。
+     * 首次登录自动注册账号（tb_account.manager_user_id 唯一绑定）并创建玩家角色，后续直接复用。
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    public String ssoLogin(AccountDto dto) {
+        String satoken = dto.getSatoken();
+        if (StrUtil.isBlank(satoken)) {
+            throw new RuntimeException("satoken 不允许为空");
+        }
+        Long managerUserId = managerSsoService.getManagerUserId(satoken);
+        if (managerUserId == null) {
+            throw new RuntimeException("manager 登录态无效或已过期");
+        }
+        Account account = accountMapper.selectOne(new QueryWrapper<Account>()
+                .eq("manager_user_id", managerUserId)
+                .eq("del_flag", false));
+        if (account == null) {
+            account = new Account(dto);
+            account.setAccount(accountUtil.getAccountStr(accountMapper.selectAccountSet(null)));
+            account.setManagerUserId(managerUserId);
+            account.setPassword(PasswordUtil.encrypt(account.getAccount(), account.getSalt()));
+            account.setPlatform("SSO");
+            if (StrUtil.isBlank(account.getNickname())) {
+                account.setNickname("玩家" + managerUserId);
+            }
+            accountMapper.insert(account);
+            playerService.addPlayerByAccount(Collections.singletonList(account));
+        } else {
+            if (account.getStatus() == 2) {
+                throw AccountException.singOut();
+            }
+            if (account.getStatus() == 0) {
+                throw AccountException.blackList();
+            }
+        }
+        StpUtil.login(account.getId());
+        return StpUtil.getTokenValueByLoginId(account.getId());
     }
 
     @Override
